@@ -29,6 +29,7 @@
 """Command line tools for manipulating a Kedro project.
 Intended to be invoked via `kedro`."""
 import os
+import socket
 import re
 import shutil
 import subprocess
@@ -304,8 +305,12 @@ def install():
 
     if (Path.cwd() / "src" / "environment.yml").is_file():
         call(["conda", "install", "--file", "src/environment.yml", "--yes"])
-
-    pip_command = ["install", "-U", "-r", "src/requirements.txt"]
+    hostname=socket.gethostname()
+    print(hostname)
+    if hostname.startswith('spiro'):
+        pip_command = ["install", "-U", "-r", "src/requirements.txt","--proxy",'http://proxy.onera:80']
+    else:
+        pip_command = ["install", "-U", "-r", "src/requirements.txt"]
 
     if os.name == "posix":
         python_call("pip", pip_command)
