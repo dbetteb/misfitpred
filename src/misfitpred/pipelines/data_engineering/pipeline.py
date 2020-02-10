@@ -33,21 +33,23 @@ PLEASE DELETE THIS FILE ONCE YOU START WORKING ON YOUR OWN PROJECT!
 
 from kedro.pipeline import Pipeline, node
 
-from .nodes import split_data
+from .nodes import preprocess_alloys_gamma_table, preprocess_alloys_gamma_prime_table
 
 
 def create_pipeline(**kwargs):
     return Pipeline(
         [
-            node(
-                split_data,
-                ["example_iris_data", "params:example_test_data_ratio"],
-                dict(
-                    train_x="example_train_x",
-                    train_y="example_train_y",
-                    test_x="example_test_x",
-                    test_y="example_test_y",
-                ),
-            )
+        node(
+            func=preprocess_alloys_gamma_table,
+            inputs="AlloysGamma",
+            outputs="PreprocessedAlloysGamma",
+            name="Preprocessing_Alloys_Gamma_Table",
+        ),
+        node(
+            func=preprocess_alloys_gamma_prime_table,
+            inputs="AlloysGammaPrime",
+            outputs="PreprocessedAlloysGammaPrime",
+            name="Preprocessing_Alloys_Gamma_Prime_Table",
+        ),
         ]
     )

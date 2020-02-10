@@ -1,0 +1,189 @@
+[MAP Logo] Materials Algorithms Project
+           Data Library
+
+ 
+
+Data Library MAP_DATA_LATTMISFIT
+
+  1. Provenance of code.
+  2. Purpose of code.
+  3. Description of subroutine's operation.
+  4. References.
+  5. Any additional information.
+  6. Download source code.
+  7. Links.
+
+ 
+
+Provenance of Source Code
+
+V Narayan,
+Phase Transformations Group,
+Department of Materials Science and Metallurgy,
+University of Cambridge,
+Cambridge, U.K.
+
+ 
+
+Purpose
+
+Provides data necessary to create a neural network model to predict lattice
+mismatch in nickel-based superalloys.
+
+ 
+
+Description
+
+Superalloys based on nickel have superior performance at high temperatures
+(e.g around 1000°C) and may be used to to the manufacture of
+high-performance creep-resistant turbine blades.
+
+The standard heat treatment of nickel superalloys results in the formation
+of Ni3Al cuboidal precipitates (gamma-prime phase) in the nickel alloy
+matrix of fcc structure (gamma phase). The superior hgh temperature
+performance of the superalloy is attributed to the formation of these
+gamma-prime phase structures, which can form more than 60% by volume of the
+material [1]. During service, the crystal structure may undergo anisotropic
+coarsening, where the gamma-prime phase precipitate is 'rafted' in various
+directions [2]; the gamma-prime phase precipitates that have grown in the
+tensile direction hinder the movement of creep dislocations and thus
+contribute to creep performance.
+
+The nickel-aluminium system is the simplest nickel-based superalloy. In
+addition, the alloy performance may be enhanced by alloying with elements
+which substitute for nickel and/or aluminium atomic sites and thus change
+change the lattice mismatch at the gamma/gamma-prime interfaces [3]. The
+activation energy of rafting has been found to be related to the lattice
+misfit of the two phases [4], defined by the equation :-
+
+delta = -(alpha(gamma-prime)-alpha(gamma)) / alpha(gamma)
+
+where alpha(gamma-prime) and alpha(gamma) are the lattice constants of the
+gamma-prime and gamma phases respectively.
+
+A negative misfit has been found, experimentally, to be favourable for creep
+resistance [5,6,7,8]. We may predict, using a neural network model, which
+alloying elements favour a negative misfit, so that new alloys may be
+designed at minimal cost.
+
+The database used with the neural network consists of :-
+
+   * Lattice constants obtained from X-ray measurements for the two phases,
+     and from data books [10,11,12].
+   * Alloy compositions, in weight%.
+
+Two alloy groups are used :-
+
+   * Commercial superalloys used in turbine blade manufacture.
+   * Experimental superalloys designed to exhibit high creep resistance at
+     1000°C (a critical temperature in commercial applications). These
+     alloys were developed by Harada et al [9].
+
+The TAR file lattmisfit.tar contains five files. Nickel.misfit.info is an
+ASCII text version of this document; the other four files make up the neural
+network database as follows :-
+
+   * Nickel.misfit.data.ga contains gamma phase compositions for each alloy.
+   * Nickel.misfit.data.gpa contains gamma-prime phase compositions for each
+     alloy.
+   * Nickel.misfit.data.gb contains gamma phase lattice parameters (in
+     Ångstroms) for each alloy.
+   * Nickel.misfit.data.gpb contains gamma-prime phase lattice parameters
+     (in Ångstroms) for each alloy.
+
+The data in Nickel.misfit.data.ga consist of 17 columns as follows :-
+
+Column 1 is the temperature at which the experiment was conducted, in °C.
+
+Columns 2-17 are compositions (in weight%) of the following elements :-
+
+   * nickel
+   * cobalt
+   * chromium
+   * molybdenum
+   * tungsten
+   * aluminium
+   * titantium
+   * niobium
+   * tantalum
+   * hafnium
+   * rhenium
+   * vanadium
+   * ferrite
+   * galium
+   * copper
+   * gold
+
+The data in Nickel.misfit.data.gpa consists of 15 column as follows :-
+
+Column 1 is the temperature at which the experiment was conducted, in °C.
+
+Columns 2-15 are compositions (in weight%) of the following elements :-
+
+   * nickel
+   * cobalt
+   * chromium
+   * molybdenum
+   * tungsten
+   * aluminium
+   * titanium
+   * niobium
+   * tantalum
+   * hafnium
+   * rhenium
+   * vanadium
+   * ferrite
+   * galium
+
+The data in Nickel.misfit.data.gp and Nickel.misfit.data.gpb consist of 1
+column, giving the is the lattice constant in Ångstroms for the gamma and
+gamm-prime phases respectively of each alloy.
+
+ 
+
+References
+
+1. R.W. Guard and J.H. Westbrook, Trans Metal AIME, 215, 807 (1959).
+
+2. J.K. Tien and S.M. Copley, Metall. Trans. A, 2, 215 (1971).
+
+3. M. Enomoto and H. Harada, Metall. Trans. A, 20, 649 (1989).
+
+4. A. Pineau, Acta Metall., 24, 449 (1976).
+
+5. D.A. Grose and G.S. Ansell, Metall. Trans. A, 12, 1631 (1981).
+
+6. R.C. Ecob, R.A. Ricks and A.J. Porter, Scipta Metall., 16, 1085 (1982).
+
+7. A. Fedholm and J.L. Strudel, Superalloys, 211, (1984).
+
+8. D.F Larhman, R.D. Field, R. Dariola and H.L. Fraser, Acta Metall., 36,
+1309 (1988).
+
+9. H. Harada, T. Yamagata, S. Nakazawa, K. Ohno and M. Yamazuki, Proc of
+Conference on High Temperature Materials for Power Engineering, Liege,
+Belgium, 1319, (1990).
+
+10. W.B. Pearson, A Handbook of Lattice Spacing and Structures of Metals and
+Alloys, 1-2, Pergamon Press, Oxford (1958)
+
+11. S. Ochai, S. Oyama and T. Suzuki, Acta Metall., 32, 289 (1984).
+
+12. S. Ochai, S. Oyama, T. Suzuki and P.M.E. Bull, 15, 53 (1984).
+
+ 
+
+Further Comments
+
+None.
+
+ 
+
+Download source code
+
+ 
+
+The MAP Project originated from a joint project of the National Physical
+Laboratory and the University of Cambridge.
+
+MAP Website administration / map@msm.cam.ac.uk 

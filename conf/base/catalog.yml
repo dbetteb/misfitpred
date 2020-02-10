@@ -121,10 +121,6 @@
 
 # This is a data set used by the example pipeline provided with the projected
 # template. Please feel free to remove it once you remove the example pipeline.
-example_iris_data:
-  type: CSVLocalDataSet
-  filepath: data/01_raw/iris.csv
-
 AlloysGamma:
   type: CSVLocalDataSet
   filepath: data/01_raw/NickelMisfitDataGa.csv
@@ -152,3 +148,24 @@ AlphaGammaPrimeAlloys:
   load_args:
     sep: "\t"
     names: ['AlphaGammaPrime']
+
+
+PreprocessedAlloysGamma:
+  type: CSVLocalDataSet
+  filepath: data/02_intermediate/ProcessedNickelMisfitDataGa.csv
+  save_args:
+    sep: "\t"
+  load_args:
+    header: 0
+    sep: "\t"
+    names: ['Temp', 'Nickel', 'Cobalt', 'Chromium', 'Molybdenum', 'Tungsten', 'Aluminium', 'Titanium', 'Niobium', 'Tantalum', 'Hafnium', 'Rhenium', 'Vanadium', 'Ferrite', 'Galium', 'Copper', 'Gold']
+
+PreprocessedAlloysGammaPrime:
+  type: CSVLocalDataSet
+  filepath: data/02_intermediate/ProcessedNickelMisfitDataGPa.csv
+  save_args:
+    sep: "\t"
+  load_args:
+    header: 0
+    sep: "\t"
+    names: ['Temp', 'Nickel', 'Cobalt', 'Chromium', 'Molybdenum', 'Tungsten', 'Aluminium', 'Titanium', 'Niobium', 'Tantalum', 'Hafnium', 'Rhenium', 'Vanadium', 'Ferrite', 'Galium']
