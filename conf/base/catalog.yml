@@ -138,3 +138,17 @@ AlphaGammaAlloys:
   load_args:
     sep: "\t"
     names: ['AlphaGamma']
+
+AlloysGammaPrime:
+  type: CSVLocalDataSet
+  filepath: data/01_raw/NickelMisfitDataGPa.csv
+  load_args:
+    sep: "\t"
+    names: ['Temp', 'Nickel', 'Cobalt', 'Chromium', 'Molybdenum', 'Tungsten', 'Aluminium', 'Titanium', 'Niobium', 'Tantalum', 'Hafnium', 'Rhenium', 'Vanadium', 'Ferrite', 'Galium']
+
+AlphaGammaPrimeAlloys:
+  type: CSVLocalDataSet
+  filepath: data/01_raw/NickelMisfitDataGPb.csv
+  load_args:
+    sep: "\t"
+    names: ['AlphaGammaPrime']
