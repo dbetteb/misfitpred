@@ -31,7 +31,7 @@ just for illustrating basic Kedro features.
 PLEASE DELETE THIS FILE ONCE YOU START WORKING ON YOUR OWN PROJECT!
 """
 
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -78,6 +78,7 @@ def augment_preprocess_alloys_gamma_prime_table(preprocess_alloys_gamma_prime_ta
     return preprocess_alloys_gamma_prime_table
 
 def plot_corr_gamma(alloys_table: pd.DataFrame, plot_corr: bool):
+    """Plot correlations between alloys compositions"""
     if plot_corr:
         elem = alloys_table.shape[1]-1
         corr = alloys_table[list(alloys_table.keys()[1:])].corr()
@@ -92,6 +93,7 @@ def plot_corr_gamma(alloys_table: pd.DataFrame, plot_corr: bool):
         return None
 
 def plot_corr_gamma_prime(alloys_table: pd.DataFrame, plot_corr: bool):
+    """Plot correlations between alloys compositions"""
     if plot_corr:
         elem = alloys_table.shape[1]-1
         corr = alloys_table[list(alloys_table.keys()[1:])].corr()
@@ -104,3 +106,27 @@ def plot_corr_gamma_prime(alloys_table: pd.DataFrame, plot_corr: bool):
         return plt
     else:
         return None
+
+def merge_alloys(complete_preprocess_alloys_gamma_table: pd.DataFrame,
+        complete_preprocess_alloys_gamma_prime_table: pd.DataFrame):
+    """Merge all alloys into one table for analytics"""
+    li = list(complete_preprocess_alloys_gamma_prime_table.keys()[:-1])
+    df = pd.merge(complete_preprocess_alloys_gamma_table,
+        complete_preprocess_alloys_gamma_prime_table, on=li, how='outer')
+    df['Phase'] = 0
+    Phase = []
+    for rows in df.iterrows():
+        if np.isnan(rows[1].AlphaGamma) & ~np.isnan(rows[1].AlphaGammaPrime):
+            Phase.append(r"$\gamma'$")
+        elif ~np.isnan(rows[1].AlphaGamma) & np.isnan(rows[1].AlphaGammaPrime):
+            Phase.append(r"$\gamma$")
+        else:
+            Phase.append(r"$\gamma$ and $\gamma'$")
+    df['Phase'] = Phase
+    return df
+
+def pairplot_merge(merge_table: pd.DataFrame,hist_vars: List):
+    """Pairplot for different alloys compositions"""
+    sns.pairplot(merge_table, vars=hist_vars, hue="Phase", corner=True, diag_kind="kde")
+    plt.subplots_adjust(left=0.07, bottom=0.07)
+    return plt

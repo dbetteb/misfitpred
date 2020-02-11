@@ -190,6 +190,18 @@ CompletePreprocessedAlloysGammaPrime:
     sep: "\t"
     names: ['Temp', 'Nickel', 'Cobalt', 'Chromium', 'Molybdenum', 'Tungsten', 'Aluminium', 'Titanium', 'Niobium', 'Tantalum', 'Hafnium', 'Rhenium', 'Vanadium', 'Ferrite', 'Galium','AlphaGammaPrime']
 
+MasterAlloys:
+  type: CSVLocalDataSet
+  filepath: data/03_primary/MasterAlloys.csv
+  save_args:
+    sep: "\t"
+  load_args:
+    header: 0
+    sep: "\t"
+    names: ['Temp', 'Nickel', 'Cobalt', 'Chromium', 'Molybdenum', 'Tungsten', 'Aluminium', 'Titanium', 'Niobium', 'Tantalum', 'Hafnium', 'Rhenium', 'Vanadium', 'Ferrite', 'Galium', 'Copper', 'Gold','AlphaGamma','AlphaGammaPrime','Phase']
+
+
+
 CorrelationPlotsAlloysGamma:
   type: kedro.contrib.io.matplotlib.matplotlib_writer.MatplotlibWriter
   filepath: results/CorrelationPlotsAlloysGamma.png
@@ -197,3 +209,7 @@ CorrelationPlotsAlloysGamma:
 CorrelationPlotsAlloysGammaPrime:
   type: kedro.contrib.io.matplotlib.matplotlib_writer.MatplotlibWriter
   filepath: results/CorrelationPlotsAlloysGammaPrime.png
+
+PairPlotsAlloys:
+  type: kedro.contrib.io.matplotlib.matplotlib_writer.MatplotlibWriter
+  filepath: results/PairPlotsAlloys.png

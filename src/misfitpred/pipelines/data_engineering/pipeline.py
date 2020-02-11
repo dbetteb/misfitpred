@@ -40,6 +40,8 @@ from .nodes import (
     augment_preprocess_alloys_gamma_prime_table,
     plot_corr_gamma,
     plot_corr_gamma_prime,
+    merge_alloys,
+    pairplot_merge,
     )
 def create_pipeline(**kwargs):
     return Pipeline(
@@ -79,6 +81,18 @@ def create_pipeline(**kwargs):
             inputs=["AlloysGammaPrime","params:plot_corr"],
             outputs="CorrelationPlotsAlloysGammaPrime",
             name="Plotting_Correlation_Alloys_Gamma_Prime",
+        ),
+        node(
+            func=merge_alloys,
+            inputs=["CompletePreprocessedAlloysGamma","CompletePreprocessedAlloysGammaPrime"],
+            outputs="MasterAlloys",
+            name="Merging all alloys",
+        ),
+        node(
+            func=pairplot_merge,
+            inputs=["MasterAlloys","params:hist_vars"],
+            outputs="PairPlotsAlloys",
+            name="Pairplot for Alloys",
         ),
         ]
     )
