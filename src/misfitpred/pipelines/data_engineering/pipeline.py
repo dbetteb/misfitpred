@@ -33,9 +33,12 @@ PLEASE DELETE THIS FILE ONCE YOU START WORKING ON YOUR OWN PROJECT!
 
 from kedro.pipeline import Pipeline, node
 
-from .nodes import preprocess_alloys_gamma_table, preprocess_alloys_gamma_prime_table
-
-
+from .nodes import (
+    preprocess_alloys_gamma_table,
+    preprocess_alloys_gamma_prime_table,
+    augment_preprocess_alloys_gamma_table,
+    augment_preprocess_alloys_gamma_prime_table
+    )
 def create_pipeline(**kwargs):
     return Pipeline(
         [
@@ -50,6 +53,18 @@ def create_pipeline(**kwargs):
             inputs="AlloysGammaPrime",
             outputs="PreprocessedAlloysGammaPrime",
             name="Preprocessing_Alloys_Gamma_Prime_Table",
+        ),
+        node(
+            func=augment_preprocess_alloys_gamma_table,
+            inputs=["PreprocessedAlloysGamma","AlphaGammaAlloys"],
+            outputs="CompletePreprocessedAlloysGamma",
+            name="Augmenting_Alloys_Gamma_Table",
+        ),
+        node(
+            func=augment_preprocess_alloys_gamma_prime_table,
+            inputs=["PreprocessedAlloysGammaPrime","AlphaGammaPrimeAlloys"],
+            outputs="CompletePreprocessedAlloysGammaPrime",
+            name="Augmenting_Alloys_Gamma_Prime_Table",
         ),
         ]
     )

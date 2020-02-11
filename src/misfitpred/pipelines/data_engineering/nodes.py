@@ -61,3 +61,15 @@ def preprocess_alloys_gamma_table(alloys_gamma_table: pd.DataFrame):
 def preprocess_alloys_gamma_prime_table(alloys_gamma_prime_table: pd.DataFrame):
     """Preprocess alloys for gamma prime lattice constant prediction"""
     return preprocess_alloys_table(alloys_gamma_prime_table)
+
+def augment_preprocess_alloys_gamma_table(preprocess_alloys_gamma_table: pd.DataFrame,
+        alpha_gamma: pd.DataFrame):
+    """Add Alpha Gamma result to preprocessed alloys gamma table"""
+    preprocess_alloys_gamma_table['AlphaGamma'] = alpha_gamma.values
+    return preprocess_alloys_gamma_table
+
+def augment_preprocess_alloys_gamma_prime_table(preprocess_alloys_gamma_prime_table: pd.DataFrame,
+        alpha_gamma_prime: pd.DataFrame):
+    """Add Alpha Gamma Prime result to preprocessed alloys gamma prime table"""
+    preprocess_alloys_gamma_prime_table['AlphaGammaPrime'] = alpha_gamma_prime.values
+    return preprocess_alloys_gamma_prime_table

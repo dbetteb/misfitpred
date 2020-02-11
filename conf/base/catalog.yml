@@ -169,3 +169,23 @@ PreprocessedAlloysGammaPrime:
     header: 0
     sep: "\t"
     names: ['Temp', 'Nickel', 'Cobalt', 'Chromium', 'Molybdenum', 'Tungsten', 'Aluminium', 'Titanium', 'Niobium', 'Tantalum', 'Hafnium', 'Rhenium', 'Vanadium', 'Ferrite', 'Galium']
+
+CompletePreprocessedAlloysGamma:
+  type: CSVLocalDataSet
+  filepath: data/02_intermediate/CompleteProcessedNickelMisfitDataGa.csv
+  save_args:
+    sep: "\t"
+  load_args:
+    header: 0
+    sep: "\t"
+    names: ['Temp', 'Nickel', 'Cobalt', 'Chromium', 'Molybdenum', 'Tungsten', 'Aluminium', 'Titanium', 'Niobium', 'Tantalum', 'Hafnium', 'Rhenium', 'Vanadium', 'Ferrite', 'Galium', 'Copper', 'Gold','AlphaGamma']
+
+CompletePreprocessedAlloysGammaPrime:
+  type: CSVLocalDataSet
+  filepath: data/02_intermediate/CompleteProcessedNickelMisfitDataGPa.csv
+  save_args:
+    sep: "\t"
+  load_args:
+    header: 0
+    sep: "\t"
+    names: ['Temp', 'Nickel', 'Cobalt', 'Chromium', 'Molybdenum', 'Tungsten', 'Aluminium', 'Titanium', 'Niobium', 'Tantalum', 'Hafnium', 'Rhenium', 'Vanadium', 'Ferrite', 'Galium','AlphaGammaPrime']
