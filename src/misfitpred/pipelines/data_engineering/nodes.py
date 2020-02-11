@@ -48,7 +48,7 @@ def preprocess_alloys_table(alloys_table: pd.DataFrame):
     """
     elements = alloys_table.keys()[1:]
     # Keep all chemical elements
-
+    print("Toto")
     for elem in elements:
         alloys_table[elem] = alloys_table[elem].apply(_parse_percentage)
 
