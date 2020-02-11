@@ -37,7 +37,9 @@ from .nodes import (
     preprocess_alloys_gamma_table,
     preprocess_alloys_gamma_prime_table,
     augment_preprocess_alloys_gamma_table,
-    augment_preprocess_alloys_gamma_prime_table
+    augment_preprocess_alloys_gamma_prime_table,
+    plot_corr_gamma,
+    plot_corr_gamma_prime,
     )
 def create_pipeline(**kwargs):
     return Pipeline(
@@ -65,6 +67,18 @@ def create_pipeline(**kwargs):
             inputs=["PreprocessedAlloysGammaPrime","AlphaGammaPrimeAlloys"],
             outputs="CompletePreprocessedAlloysGammaPrime",
             name="Augmenting_Alloys_Gamma_Prime_Table",
+        ),
+        node(
+            func=plot_corr_gamma,
+            inputs=["AlloysGamma","params:plot_corr"],
+            outputs="CorrelationPlotsAlloysGamma",
+            name="Plotting_Correlation_Alloys_Gamma",
+        ),
+        node(
+            func=plot_corr_gamma_prime,
+            inputs=["AlloysGammaPrime","params:plot_corr"],
+            outputs="CorrelationPlotsAlloysGammaPrime",
+            name="Plotting_Correlation_Alloys_Gamma_Prime",
         ),
         ]
     )

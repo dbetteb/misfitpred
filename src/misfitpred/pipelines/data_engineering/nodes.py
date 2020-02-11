@@ -33,7 +33,10 @@ PLEASE DELETE THIS FILE ONCE YOU START WORKING ON YOUR OWN PROJECT!
 
 from typing import Any, Dict
 
+import numpy as np
+import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 
 def _parse_percentage(x: float):
     return float(x)/100.
@@ -73,3 +76,31 @@ def augment_preprocess_alloys_gamma_prime_table(preprocess_alloys_gamma_prime_ta
     """Add Alpha Gamma Prime result to preprocessed alloys gamma prime table"""
     preprocess_alloys_gamma_prime_table['AlphaGammaPrime'] = alpha_gamma_prime.values
     return preprocess_alloys_gamma_prime_table
+
+def plot_corr_gamma(alloys_table: pd.DataFrame, plot_corr: bool):
+    if plot_corr:
+        elem = alloys_table.shape[1]-1
+        corr = alloys_table[list(alloys_table.keys()[1:])].corr()
+        mask = np.triu(np.ones_like(corr, dtype=np.bool))
+        cmap = sns.diverging_palette(220, 10, as_cmap=True)
+        f, ax = plt.subplots(figsize=(11, 9))
+        sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
+            square=True, linewidths=.5, cbar_kws={"shrink": .5})
+        plt.title(r"Correlation of the $16$ chemical elements for $\alpha_{\gamma}$", fontsize=14)
+        return plt
+    else:
+        return None
+
+def plot_corr_gamma_prime(alloys_table: pd.DataFrame, plot_corr: bool):
+    if plot_corr:
+        elem = alloys_table.shape[1]-1
+        corr = alloys_table[list(alloys_table.keys()[1:])].corr()
+        mask = np.triu(np.ones_like(corr, dtype=np.bool))
+        cmap = sns.diverging_palette(220, 10, as_cmap=True)
+        f, ax = plt.subplots(figsize=(11, 9))
+        sns.heatmap(corr, mask=mask, cmap=cmap, vmax=.3, center=0,
+            square=True, linewidths=.5, cbar_kws={"shrink": .5})
+        plt.title(r"Correlation of the $14$ chemical elements for $\alpha_{\gamma'}$", fontsize=14)
+        return plt
+    else:
+        return None

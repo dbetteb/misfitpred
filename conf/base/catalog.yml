@@ -189,3 +189,11 @@ CompletePreprocessedAlloysGammaPrime:
     header: 0
     sep: "\t"
     names: ['Temp', 'Nickel', 'Cobalt', 'Chromium', 'Molybdenum', 'Tungsten', 'Aluminium', 'Titanium', 'Niobium', 'Tantalum', 'Hafnium', 'Rhenium', 'Vanadium', 'Ferrite', 'Galium','AlphaGammaPrime']
+
+CorrelationPlotsAlloysGamma:
+  type: kedro.contrib.io.matplotlib.matplotlib_writer.MatplotlibWriter
+  filepath: results/CorrelationPlotsAlloysGamma.png
+
+CorrelationPlotsAlloysGammaPrime:
+  type: kedro.contrib.io.matplotlib.matplotlib_writer.MatplotlibWriter
+  filepath: results/CorrelationPlotsAlloysGammaPrime.png
