@@ -69,8 +69,8 @@ def create_pipelines(**kwargs) -> Dict[str, Pipeline]:
     # WELL AS pipelines/data_science AND pipelines/data_engineering
     # -------------------------------------------------------------------------
     data_engineering_pipeline = de.create_pipeline()
-
+    data_science_pipeline = ds.create_pipeline()
     return {
         "de": data_engineering_pipeline,
-        "__default__": data_engineering_pipeline,
+        "__default__": data_engineering_pipeline+data_science_pipeline,
     }

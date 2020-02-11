@@ -38,6 +38,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
+from sklearn.model_selection import train_test_split
+
 def _parse_percentage(x: float):
     return float(x)/100.
 
@@ -130,3 +132,17 @@ def pairplot_merge(merge_table: pd.DataFrame,hist_vars: List):
     sns.pairplot(merge_table, vars=hist_vars, hue="Phase", corner=True, diag_kind="kde")
     plt.subplots_adjust(left=0.07, bottom=0.07)
     return plt
+
+def split_gamma(complete_preprocess_alloys_gamma_table: pd.DataFrame,
+        test_ratio: float, seed: int):
+    """Split data for gamma constant model training"""
+    li = list(complete_preprocess_alloys_gamma_table.keys())
+    X  = complete_preprocess_alloys_gamma_table[li[:-1]].values
+    y  = complete_preprocess_alloys_gamma_table[li[-1]].values
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_ratio, random_state=seed)
+    return dict(
+        train_x_gamma=X_train,
+        train_y_gamma=y_train,
+        test_x_gamma=X_test,
+        test_y_gamma=y_test,
+    )

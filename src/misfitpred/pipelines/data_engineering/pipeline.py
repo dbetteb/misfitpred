@@ -39,6 +39,7 @@ from .nodes import (
     plot_corr_gamma_prime,
     merge_alloys,
     pairplot_merge,
+    split_gamma,
     )
 def create_pipeline(**kwargs):
     return Pipeline(
@@ -90,6 +91,17 @@ def create_pipeline(**kwargs):
             inputs=["MasterAlloys","params:hist_vars"],
             outputs="PairPlotsAlloys",
             name="Pairplot for Alloys",
+        ),
+        node(
+            func=split_gamma,
+            inputs=["CompletePreprocessedAlloysGamma","params:test_data_ratio","params:random_seed"],
+            outputs=dict(
+                    train_x_gamma="train_x_gamma",
+                    train_y_gamma="train_y_gamma",
+                    test_x_gamma="test_x_gamma",
+                    test_y_gamma="test_y_gamma",
+                ),
+            name="Split data for model training",
         ),
         ]
     )

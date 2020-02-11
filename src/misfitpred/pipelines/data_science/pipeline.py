@@ -41,14 +41,14 @@ def create_pipeline(**kwargs):
         [
             node(
                 train_model,
-                ["example_train_x", "example_train_y", "parameters"],
+                ["train_x_gamma", "train_y_gamma", "params:max_depth","params:n_estimators"],
                 "example_model",
             ),
             node(
                 predict,
-                dict(model="example_model", test_x="example_test_x"),
+                dict(model="example_model", test_x="test_x_gamma"),
                 "example_predictions",
             ),
-            node(report_accuracy, ["example_predictions", "example_test_y"], None),
+            node(report_accuracy, ["example_predictions", "test_y_gamma"], None),
         ]
     )

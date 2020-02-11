@@ -4,6 +4,9 @@
 # `src/pipelines/`
 plot_corr: True
 hist_vars: ["Nickel","Tungsten","Tantalum","Aluminium","Rhenium"]
-example_test_data_ratio: 0.2
+random_seed: 24
+test_data_ratio: 0.2
+max_depth: 10
+n_estimators: 100
 example_num_train_iter: 10000
 example_learning_rate: 0.01
