@@ -40,15 +40,40 @@ def create_pipeline(**kwargs):
     return Pipeline(
         [
             node(
-                train_model,
-                ["train_x_gamma", "train_y_gamma", "params:max_depth","params:n_estimators"],
-                "example_model",
+                func=train_model,
+                inputs=["train_x_gamma", "train_y_gamma", "params:max_depth","params:n_estimators"],
+                outputs="model_gamma",
+                name="Training model for gamma lattice constant prediction"
             ),
             node(
-                predict,
-                dict(model="example_model", test_x="test_x_gamma"),
-                "example_predictions",
+                func=predict,
+                inputs=["model_gamma", "test_x_gamma"],
+                outputs="predictions_gamma",
+                name="prediction for test basis for gamma lattice constant"
             ),
-            node(report_accuracy, ["example_predictions", "test_y_gamma"], None),
+            node(
+            func=report_accuracy,
+            inputs=["predictions_gamma", "test_y_gamma"],
+            outputs=None,
+            name="accuracy metrics for gamma lattice constant"
+            ),
+            node(
+                func=train_model,
+                inputs=["train_x_gamma_prime", "train_y_gamma_prime", "params:max_depth","params:n_estimators"],
+                outputs="model_gamma_prime",
+                name="Training model for gamma prime lattice constant prediction"
+            ),
+            node(
+                func=predict,
+                inputs=["model_gamma_prime", "test_x_gamma_prime"],
+                outputs="predictions_gamma_prime",
+                name="prediction for test basis for gamma prime lattice constant"
+            ),
+            node(
+            func=report_accuracy,
+            inputs=["predictions_gamma_prime", "test_y_gamma_prime"],
+            outputs=None,
+            name="accuracy metrics for gamma prime lattice constant"
+            ),
         ]
     )
