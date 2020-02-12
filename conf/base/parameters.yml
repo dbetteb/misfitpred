@@ -3,10 +3,11 @@
 # remove the example pipeline from pipeline.py and the example nodes in
 # `src/pipelines/`
 plot_corr: True
-hist_vars: ["Nickel","Tungsten","Tantalum","Aluminium","Rhenium"]
+#hist_vars: ["Nickel","Tungsten","Tantalum","Aluminium","Rhenium","Cobalt"]
+hist_vars: ["Nickel","Chromium","Cobalt","Aluminium","Titanium"]
 random_seed: 24
 test_data_ratio: 0.2
-max_depth: 10
+max_depth: 3
 n_estimators: 100
 example_num_train_iter: 10000
 example_learning_rate: 0.01

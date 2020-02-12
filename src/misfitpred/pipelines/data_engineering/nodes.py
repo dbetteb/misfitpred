@@ -146,3 +146,17 @@ def split_gamma(complete_preprocess_alloys_gamma_table: pd.DataFrame,
         test_x_gamma=X_test,
         test_y_gamma=y_test,
     )
+
+def split_gamma_prime(complete_preprocess_alloys_gamma_prime_table: pd.DataFrame,
+        test_ratio: float, seed: int):
+    """Split data for gamma prime constant model training"""
+    li = list(complete_preprocess_alloys_gamma_prime_table.keys())
+    X  = complete_preprocess_alloys_gamma_prime_table[li[:-1]].values
+    y  = complete_preprocess_alloys_gamma_prime_table[li[-1]].values
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_ratio, random_state=seed)
+    return dict(
+        train_x_gamma_prime=X_train,
+        train_y_gamma_prime=y_train,
+        test_x_gamma_prime=X_test,
+        test_y_gamma_prime=y_test,
+    )
