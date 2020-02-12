@@ -33,21 +33,50 @@ PLEASE DELETE THIS FILE ONCE YOU START WORKING ON YOUR OWN PROJECT!
 
 from kedro.pipeline import Pipeline, node
 
-from .nodes import predict, report_accuracy, train_model
+from .nodes import (
+        predict,
+        report_accuracy,
+        train_model,
+        split_gamma,
+        split_gamma_prime,
+        )
+
 
 
 def create_pipeline(**kwargs):
     return Pipeline(
         [
+        node(
+            func=split_gamma,
+            inputs=["CompletePreprocessedAlloysGamma","params:test_data_ratio","params:random_seed"],
+            outputs=dict(
+                    train_x_gamma="train_x_gamma",
+                    train_y_gamma="train_y_gamma",
+                    test_x_gamma="test_x_gamma",
+                    test_y_gamma="test_y_gamma",
+                ),
+            name="Split data for model training for gamma prediction",
+        ),
+        node(
+            func=split_gamma_prime,
+            inputs=["CompletePreprocessedAlloysGammaPrime","params:test_data_ratio","params:random_seed"],
+            outputs=dict(
+                    train_x_gamma_prime="train_x_gamma_prime",
+                    train_y_gamma_prime="train_y_gamma_prime",
+                    test_x_gamma_prime="test_x_gamma_prime",
+                    test_y_gamma_prime="test_y_gamma_prime",
+                ),
+            name="Split data for model training for gamma prime prediction",
+        ),
             node(
                 func=train_model,
                 inputs=["train_x_gamma", "train_y_gamma", "params:max_depth","params:n_estimators"],
-                outputs="model_gamma",
+                outputs="GammaModel",
                 name="Training model for gamma lattice constant prediction"
             ),
             node(
                 func=predict,
-                inputs=["model_gamma", "test_x_gamma"],
+                inputs=["GammaModel", "test_x_gamma"],
                 outputs="predictions_gamma",
                 name="prediction for test basis for gamma lattice constant"
             ),
@@ -60,12 +89,12 @@ def create_pipeline(**kwargs):
             node(
                 func=train_model,
                 inputs=["train_x_gamma_prime", "train_y_gamma_prime", "params:max_depth","params:n_estimators"],
-                outputs="model_gamma_prime",
+                outputs="GammaPrimeModel",
                 name="Training model for gamma prime lattice constant prediction"
             ),
             node(
                 func=predict,
-                inputs=["model_gamma_prime", "test_x_gamma_prime"],
+                inputs=["GammaPrimeModel", "test_x_gamma_prime"],
                 outputs="predictions_gamma_prime",
                 name="prediction for test basis for gamma prime lattice constant"
             ),

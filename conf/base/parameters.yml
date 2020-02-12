@@ -5,9 +5,7 @@
 plot_corr: True
 #hist_vars: ["Nickel","Tungsten","Tantalum","Aluminium","Rhenium","Cobalt"]
 hist_vars: ["Nickel","Chromium","Cobalt","Aluminium","Titanium"]
-random_seed: 24
-test_data_ratio: 0.2
+random_seed: 10
+test_data_ratio: 0.1
 max_depth: 3
 n_estimators: 100
-example_num_train_iter: 10000
-example_learning_rate: 0.01

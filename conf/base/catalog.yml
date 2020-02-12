@@ -213,3 +213,13 @@ CorrelationPlotsAlloysGammaPrime:
 PairPlotsAlloys:
   type: kedro.contrib.io.matplotlib.matplotlib_writer.MatplotlibWriter
   filepath: results/PairPlotsAlloys.png
+
+GammaModel:
+  type: PickleLocalDataSet
+  filepath: data/06_models/GammaModel.pkl
+  versioned: true
+
+GammaPrimeModel:
+  type: PickleLocalDataSet
+  filepath: data/06_models/GammaPrimeModel.pkl
+  versioned: true

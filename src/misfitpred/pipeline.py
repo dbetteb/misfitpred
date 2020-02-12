@@ -72,5 +72,6 @@ def create_pipelines(**kwargs) -> Dict[str, Pipeline]:
     data_science_pipeline = ds.create_pipeline()
     return {
         "de": data_engineering_pipeline,
+        "ds": data_science_pipeline,
         "__default__": data_engineering_pipeline+data_science_pipeline,
     }
